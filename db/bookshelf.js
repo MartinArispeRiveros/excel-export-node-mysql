@@ -27,12 +27,11 @@ var Event = bookshelf.Model.extend({
   tableName       : 'event',
   idAttribute     : 'event_id',
   cardAccessTypes : function() {
-    return this.hasMany(CardAccessType, 'card_access_id');
+    return this.hasMany(CardAccessType, 'event_id');
   }
 });
-  
 
 // example
-CardAccessType.where({card_access_type_id: 1}).fetch({withRelated: ['event']}).then(function(cardAccessType) {
-  console.log(cardAccessType.related('event').toJSON());
+Event.where({event_id: 1}).fetch({withRelated: ['cardAccessTypes']}).then(function(event) {
+  console.log(event.related('cardAccessTypes').toJSON());
 });
