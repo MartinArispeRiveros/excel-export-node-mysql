@@ -18,6 +18,11 @@ var CardAccessType = bookshelf.Model.extend({
   }
 });
 
+var Client = bookshelf.Model.extend({
+  tableName   : 'client',
+  idAttribute : 'client_id'
+});
+
 var Event = bookshelf.Model.extend({
   tableName       : 'event',
   idAttribute     : 'event_id',
@@ -28,6 +33,6 @@ var Event = bookshelf.Model.extend({
   
 
 // example
-CardAccessType.where({card_access_type_id: 2}).fetch({withRelated: ['event']}).then(function(cardAccessType) {
+CardAccessType.where({card_access_type_id: 1}).fetch({withRelated: ['event']}).then(function(cardAccessType) {
   console.log(cardAccessType.related('event').toJSON());
 });
