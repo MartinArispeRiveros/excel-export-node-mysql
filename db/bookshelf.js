@@ -39,8 +39,13 @@ var ClientRequestsEvent = bookshelf.Model.extend({
 });
 
 var ConfigTicket = bookshelf.Model.extend({
-  tableName: 'config_ticket',
-  idAttribute: 'config_ticket_id'
+  tableName   : 'config_ticket',
+  idAttribute : 'config_ticket_id'
+});
+
+var Dosage = bookshelf.Model.extend({
+  tableName   : 'dosage',
+  idAttribute : 'dosage_id'
 });
 
 var Event = bookshelf.Model.extend({
