@@ -74,6 +74,9 @@ var Event = bookshelf.Model.extend({
   },
   schedules            : function() {
     return this.hasMany(Schedule, 'event_id');
+  },
+  subsidiarys          : function() {
+    return this.hasMany(Subsidiary, 'event_id');
   }
 });
 
@@ -120,7 +123,15 @@ var Schedule = bookshelf.Model.extend({
   }
 });
 
+var Subsidiary = bookshelf.Model.extend({
+  tableName   :'subsidiary',
+  idAttribute :'subsidiary_id',
+  event       : function() {
+    return this.belongsTo(Event, 'event_id');
+  }
+});
+
 // example
-Event.where({event_id: 1}).fetch({withRelated: ['cardAccessTypes']}).then(function(event) {
-  console.log(event.related('cardAccessTypes').toJSON());
+Event.where({event_id: 1}).fetch({withRelated: ['subsidiarys']}).then(function(event) {
+  console.log(event.related('subsidiarys').toJSON());
 });
