@@ -1,13 +1,13 @@
 var knex      = require('./knex');
 var bookshelf = require('bookshelf')(knex);
 
-var Artist = bookshelf.Model.extend({
+/*var Artist = bookshelf.Model.extend({
   tableName   : 'artist',
   idAttribute : 'artist_id',
   schedules   : function() {
     return this.hasMany(Schedule, 'artist_id');
   }
-});
+});*/
 
 var CardAccess = bookshelf.Model.extend({
   tableName   : 'card_access',
@@ -181,26 +181,7 @@ var UserIdentification = bookshelf.Model.extend({
   }
 });
 
-module.exports = {
-  Artist              : Artist,
-  CardAccess          : CardAccess,
-  CardAccessType      : CardAccessType,
-  Client              : Client,
-  ClientRequestsEvent : ClientRequestsEvent,
-  ConfigTicket        : ConfigTicket,
-  Dosage              : Dosage,
-  Event               : Event,
-  EventStateLog       : EventStateLog,
-  EventTicketType     : EventTicketType,
-  Invoice             : Invoice,
-  Payment             : Payment,
-  Schedule            : Schedule,
-  Subsidiary          : Subsidiary,
-  Ticket              : Ticket,
-  TicketAccessLog     : TicketAccessLog,
-  User                : User,
-  UserIdentification  : UserIdentification
-}
+module.exports = bookshelf;
 
 // example
 /*Event.where({event_id: 1}).fetch({withRelated: ['subsidiarys']}).then(function(event) {

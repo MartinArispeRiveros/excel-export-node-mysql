@@ -1,10 +1,11 @@
 var express = require('express');
 var router  = express.Router();
+
 var xlsx    = require('node-xlsx').default;
-var dp      = require('../db/bookshelf');
+var Artist  = require('../models/Artist');
 
 router.get('/',function(req, res) {
-  dp.Artist.collection().fetch().then(function(collection) {
+  Artist.collection().fetch().then(function(collection) {
     var rows = collection.toJSON();
     var data = [];
     for (var index = 0; index < rows.length; index++) {
