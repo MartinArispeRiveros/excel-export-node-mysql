@@ -59,12 +59,23 @@ var Event = bookshelf.Model.extend({
   },
   eventStateLogs       : function() {
     return this.hasMany(EventStateLog, 'event_id');
+  },
+  eventTicketTypes     : function() {
+    return this.hasMany(EventTicketType, 'event_id');
   }
 });
 
 var EventStateLog = bookshelf.Model.extend({
   tableName   : 'event_state_log',
   idAttribute : 'event_state_log_id',
+  event       : function() {
+    return this.belongsTo(Event, 'event_id');
+  }
+});
+
+var EventTicketType = bookshelf.Model.extend({
+  tableName   : 'event_ticket_type',
+  idAttribute : 'event_ticket_type_id',
   event       : function() {
     return this.belongsTo(Event, 'event_id');
   }
