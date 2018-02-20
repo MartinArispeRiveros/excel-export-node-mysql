@@ -163,10 +163,21 @@ var TicketAccessLog = bookshelf.Model.extend({
 });
 
 var User = bookshelf.Model.extend({
-  tableName   : 'user',
-  idAttribute : 'user_id',
-  subsidiary  : function() {
+  tableName           : 'user',
+  idAttribute         : 'user_id',
+  subsidiary          : function() {
     return this.belongsTo(Subsidiary, 'subsidiary_id');
+  },
+  userIdentifications : function() {
+    return this.hasMany(UserIdentification, 'user_id');
+  }
+});
+
+var UserIdentification = bookshelf.Model.extend({
+  tableName   : 'user_identification',
+  idAttribute : 'user_identification_id',
+  user        : function() {
+    return this.belongsTo(User, 'user_id');
   }
 });
 
