@@ -4,7 +4,7 @@ var router  = express.Router();
 var xlsx    = require('node-xlsx').default;
 var Artist  = require('../models/artist');
 
-router.get('/',function(req, res) {
+router.get('/', function(req, res) {
   Artist.collection().fetch().then(function(collection) {
     var rows = collection.toJSON();
     var data = [];
