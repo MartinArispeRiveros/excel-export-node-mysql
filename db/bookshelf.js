@@ -14,7 +14,7 @@ var CardAccess = bookshelf.Model.extend({
 var CardAccessType = bookshelf.Model.extend({
   tableName   : 'card_access_type',
   idAttribute : 'card_access_type_id',
-  event      : function() {
+  event       : function() {
     return this.belongsTo(Event, 'event_id');
   }
 });
@@ -23,7 +23,7 @@ var Client = bookshelf.Model.extend({
   tableName            : 'client',
   idAttribute          : 'client_id',
   clientRequestsEvents : function() {
-    return this.hasMany(ClientRequestsEvent, 'client_id')
+    return this.hasMany(ClientRequestsEvent, 'client_id');
   }
 });
 
@@ -34,9 +34,14 @@ var ClientRequestsEvent = bookshelf.Model.extend({
     return this.belongsTo(Client, 'client_id');
   },
   event       : function() {
-    return this.belongsTo(Event, 'event_id')
+    return this.belongsTo(Event, 'event_id');
   }
-})
+});
+
+var ConfigTicket = bookshelf.Model.extend({
+  tableName: 'config_ticket',
+  idAttribute: 'config_ticket_id'
+});
 
 var Event = bookshelf.Model.extend({
   tableName            : 'event',
@@ -45,7 +50,7 @@ var Event = bookshelf.Model.extend({
     return this.hasMany(CardAccessType, 'event_id');
   },
   clientRequestsEvents : function() {
-    return this.hasMany(ClientRequestsEvent, 'event_id')
+    return this.hasMany(ClientRequestsEvent, 'event_id');
   }
 });
 
