@@ -65,6 +65,9 @@ var Event = bookshelf.Model.extend({
   },
   eventTicketTypes     : function() {
     return this.hasMany(EventTicketType, 'event_id');
+  },
+  payments             : function() {
+    return this.hasMany(Payment, 'event_id');
   }
 });
 
@@ -85,10 +88,18 @@ var EventTicketType = bookshelf.Model.extend({
 });
 
 var Invoice = bookshelf.Model.extend({
-  tableName   :'invoice',
+  tableName   : 'invoice',
   idAttribute : 'invoice_id',
   dosage      : function() {
     return this.belongsTo(Dosage, 'dosage_id');
+  }
+});
+
+var Payment = bookshelf.Model.extend({
+  tableName   : 'payment',
+  idAttribute : 'payment_id',
+  event       : function() {
+    return this.belongsTo(Event, 'event_id');
   }
 });
 
