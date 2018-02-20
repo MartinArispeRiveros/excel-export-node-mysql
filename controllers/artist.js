@@ -1,9 +1,9 @@
-var express = require("express");
-var app     = express();
+var express = require('express');
+var router  = express.Router();
 var xlsx    = require('node-xlsx').default;
-var dp      = require('./db/bookshelf');
+var dp      = require('../db/bookshelf');
 
-app.get('/api/v1/Artist',function(req, res) {
+router.get('/',function(req, res) {
   dp.Artist.collection().fetch().then(function(collection) {
     var rows = collection.toJSON();
     var data = [];
@@ -21,5 +21,4 @@ app.get('/api/v1/Artist',function(req, res) {
   });
 });
 
-
-app.listen(3000);
+module.exports = router;
