@@ -138,13 +138,24 @@ var Subsidiary = bookshelf.Model.extend({
 });
 
 var Ticket = bookshelf.Model.extend({
-  tableName       : 'ticket',
-  idAttribute     : 'ticket_id',
-  eventTicketType : function() {
+  tableName        : 'ticket',
+  idAttribute      : 'ticket_id',
+  eventTicketType  : function() {
     return this.belongsTo(EventTicketType, 'event_ticket_type_id');
   },
-  invoice         : function() {
+  invoice          : function() {
     return this.belongsTo(Invoice, 'invoice_id');
+  },
+  ticketAccessLogs : function() {
+    return this.hasMany(TicketAccessLog, 'ticket_id');
+  }
+});
+
+var TicketAccessLog = bookshelf.Model.extend({
+  tableName   : 'ticket_access_log',
+  idAttribute : 'ticket_access_log_id',
+  ticket      : function() {
+    return this.belongsTo(Ticket, 'ticket_id');
   }
 });
 
