@@ -2,7 +2,7 @@ var knex      = require('./knex');
 var bookshelf = require('bookshelf')(knex);
 
 var Artist = bookshelf.Model.extend({
-  tableName   : 'Artist',
+  tableName   : 'artist',
   idAttribute : 'artist_id',
   schedules   : function() {
     return this.hasMany(Schedule, 'artist_id');
@@ -134,6 +134,9 @@ var Subsidiary = bookshelf.Model.extend({
   idAttribute : 'subsidiary_id',
   event       : function() {
     return this.belongsTo(Event, 'event_id');
+  },
+  users       : function() {
+    return this.hasMany(User, 'subsidiary_id');
   }
 });
 
@@ -156,6 +159,14 @@ var TicketAccessLog = bookshelf.Model.extend({
   idAttribute : 'ticket_access_log_id',
   ticket      : function() {
     return this.belongsTo(Ticket, 'ticket_id');
+  }
+});
+
+var User = bookshelf.Model.extend({
+  tableName   : 'user',
+  idAttribute : 'user_id',
+  subsidiary  : function() {
+    return this.belongsTo(Subsidiary, 'subsidiary_id');
   }
 });
 
