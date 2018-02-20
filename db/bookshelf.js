@@ -1,4 +1,5 @@
-var bookshelf = require('./knex');
+var knex      = require('./knex');
+var bookshelf = require('bookshelf')(knex);
 
 var Artist = bookshelf.Model.extend({
   tableName   : 'Artist',
@@ -19,15 +20,32 @@ var CardAccessType = bookshelf.Model.extend({
 });
 
 var Client = bookshelf.Model.extend({
-  tableName   : 'client',
-  idAttribute : 'client_id'
+  tableName            : 'client',
+  idAttribute          : 'client_id',
+  clientRequestsEvents : function() {
+    return this.hasMany(ClientRequestsEvent, 'client_id')
+  }
 });
 
+var ClientRequestsEvent = bookshelf.Model.extend({
+  tableName   : 'client_requests_event',
+  idAttribute : 'client_requests_event_id',
+  client      : function() {
+    return this.belongsTo(Client, 'client_id');
+  },
+  event       : function() {
+    return this.belongsTo(Event, 'event_id')
+  }
+})
+
 var Event = bookshelf.Model.extend({
-  tableName       : 'event',
-  idAttribute     : 'event_id',
-  cardAccessTypes : function() {
+  tableName            : 'event',
+  idAttribute          : 'event_id',
+  cardAccessTypes      : function() {
     return this.hasMany(CardAccessType, 'event_id');
+  },
+  clientRequestsEvents : function() {
+    return this.hasMany(ClientRequestsEvent, 'event_id')
   }
 });
 
