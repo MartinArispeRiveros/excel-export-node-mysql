@@ -7,3 +7,5 @@ var knex = require('knex')({
     database :  'actua'
   }
 });
+
+module.exports = require('bookshelf')(knex);

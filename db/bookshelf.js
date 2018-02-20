@@ -1,0 +1,2 @@
+var bookshelf = require('./knex');
+
