@@ -17,7 +17,7 @@ app.get('/api/v1/Artist',function(req, res) {
     var buffer = xlsx.build([{name: "main", data: data}]);
     res.setHeader('Content-disposition', 'attachment; filename=Artist.xlsx');
     res.send(buffer);
-    console.log('Table %s to excel', req.params.table);
+    console.log('Table Artist to excel');
   });
 });
 
