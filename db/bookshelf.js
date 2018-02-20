@@ -93,6 +93,9 @@ var EventTicketType = bookshelf.Model.extend({
   idAttribute : 'event_ticket_type_id',
   event       : function() {
     return this.belongsTo(Event, 'event_id');
+  },
+  tickets     : function() {
+    return this.hasMany(Ticket, 'event_ticket_type_id');
   }
 });
 
@@ -101,6 +104,9 @@ var Invoice = bookshelf.Model.extend({
   idAttribute : 'invoice_id',
   dosage      : function() {
     return this.belongsTo(Dosage, 'dosage_id');
+  },
+  tickets     : function() {
+    return this.hasMany(Ticket, 'invoice_id');
   }
 });
 
@@ -124,10 +130,21 @@ var Schedule = bookshelf.Model.extend({
 });
 
 var Subsidiary = bookshelf.Model.extend({
-  tableName   :'subsidiary',
-  idAttribute :'subsidiary_id',
+  tableName   : 'subsidiary',
+  idAttribute : 'subsidiary_id',
   event       : function() {
     return this.belongsTo(Event, 'event_id');
+  }
+});
+
+var Ticket = bookshelf.Model.extend({
+  tableName       : 'ticket',
+  idAttribute     : 'ticket_id',
+  eventTicketType : function() {
+    return this.belongsTo(EventTicketType, 'event_ticket_type_id');
+  },
+  invoice         : function() {
+    return this.belongsTo(Invoice, 'invoice_id');
   }
 });
 
