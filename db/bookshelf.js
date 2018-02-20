@@ -181,7 +181,29 @@ var UserIdentification = bookshelf.Model.extend({
   }
 });
 
+module.exports = {
+  Artist              : Artist,
+  CardAccess          : CardAccess,
+  CardAccessType      : CardAccessType,
+  Client              : Client,
+  ClientRequestsEvent : ClientRequestsEvent,
+  ConfigTicket        : ConfigTicket,
+  Dosage              : Dosage,
+  Event               : Event,
+  EventStateLog       : EventStateLog,
+  EventTicketType     : EventTicketType,
+  Invoice             : Invoice,
+  Payment             : Payment,
+  Schedule            : Schedule,
+  Subsidiary          : Subsidiary,
+  Ticket              : Ticket,
+  TicketAccessLog     : TicketAccessLog,
+  User                : User,
+  UserIdentification  : UserIdentification
+}
+
 // example
-Event.where({event_id: 1}).fetch({withRelated: ['subsidiarys']}).then(function(event) {
+/*Event.where({event_id: 1}).fetch({withRelated: ['subsidiarys']}).then(function(event) {
   console.log(event.related('subsidiarys').toJSON());
 });
+*/
