@@ -3,7 +3,10 @@ var bookshelf = require('bookshelf')(knex);
 
 var Artist = bookshelf.Model.extend({
   tableName   : 'Artist',
-  tableName   : 'artist_id'
+  idAttribute : 'artist_id',
+  schedules   : function() {
+    return this.hasMany(Schedule, 'artist_id');
+  }
 });
 
 var CardAccess = bookshelf.Model.extend({
@@ -68,6 +71,9 @@ var Event = bookshelf.Model.extend({
   },
   payments             : function() {
     return this.hasMany(Payment, 'event_id');
+  },
+  schedules            : function() {
+    return this.hasMany(Schedule, 'event_id');
   }
 });
 
@@ -98,6 +104,17 @@ var Invoice = bookshelf.Model.extend({
 var Payment = bookshelf.Model.extend({
   tableName   : 'payment',
   idAttribute : 'payment_id',
+  event       : function() {
+    return this.belongsTo(Event, 'event_id');
+  }
+});
+
+var Schedule = bookshelf.Model.extend({
+  tableName   : 'schedule',
+  idAttribute : 'schedule_id',
+  artist      : function() {
+    return this.belongsTo(Artist, 'artist_id');
+  },
   event       : function() {
     return this.belongsTo(Event, 'event_id');
   }
