@@ -45,7 +45,10 @@ var ConfigTicket = bookshelf.Model.extend({
 
 var Dosage = bookshelf.Model.extend({
   tableName   : 'dosage',
-  idAttribute : 'dosage_id'
+  idAttribute : 'dosage_id',
+  invoices    : function() {
+    return this.hasMany(Invoice, 'dosage_id')
+  }
 });
 
 var Event = bookshelf.Model.extend({
@@ -78,6 +81,14 @@ var EventTicketType = bookshelf.Model.extend({
   idAttribute : 'event_ticket_type_id',
   event       : function() {
     return this.belongsTo(Event, 'event_id');
+  }
+});
+
+var Invoice = bookshelf.Model.extend({
+  tableName   :'invoice',
+  idAttribute : 'invoice_id',
+  dosage      : function() {
+    return this.belongsTo(Dosage, 'dosage_id');
   }
 });
 
