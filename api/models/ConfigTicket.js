@@ -1,4 +1,4 @@
-var bookshelf = require('../db/bookshelf');
+var bookshelf = require('../commons/bookshelf');
 
 var ConfigTicket = bookshelf.Model.extend({
   tableName   : 'config_ticket',

@@ -1,4 +1,4 @@
-var knex = require('knex')({
+var dbConfig = {
   client: 'mysql',
   connection: {
     host     :  'localhost',
@@ -6,6 +6,6 @@ var knex = require('knex')({
     password :  '',
     database :  'actua'
   }
-});
+};
 
-module.exports = knex;
+module.exports = dbConfig;
