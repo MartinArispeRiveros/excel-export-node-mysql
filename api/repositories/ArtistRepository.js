@@ -6,6 +6,10 @@ class ArtistRepository {
     return Artist.collection().fetch();
   }
 
+  static getArtistById(id, fetch = {}) {
+    return Artist.where('artist_id', id).fetch(fetch);
+  }
+
 }
 
 module.exports = ArtistRepository;
