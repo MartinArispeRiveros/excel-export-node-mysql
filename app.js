@@ -1,4 +1,4 @@
-var router  = require('./controllers');
+var router  = require('./api/controllers');
 var express = require('express');
 var app     = express();
 
