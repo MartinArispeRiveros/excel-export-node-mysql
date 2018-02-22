@@ -3,6 +3,7 @@ var router  = express.Router();
 
 var xlsx    = require('node-xlsx').default;
 var Artist  = require('../models/artist');
+var excel   = require('../helpers/Excel');
 
 router.get('/', function(req, res) {
   Artist.collection().fetch().then(function(collection) {
