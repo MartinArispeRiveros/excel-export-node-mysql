@@ -1,6 +1,6 @@
 var bookshelf = require('../db/bookshelf');
 
-require('./event');
+require('./Event');
 
 var CardAccessType = bookshelf.Model.extend({
   tableName   : 'card_access_type',

@@ -1,7 +1,7 @@
 var bookshelf = require('../db/bookshelf');
 
-require('./subsidiary');
-require('./userIdentification');
+require('./Subsidiary');
+require('./UserIdentification');
 
 var User = bookshelf.Model.extend({
   tableName           : 'user',

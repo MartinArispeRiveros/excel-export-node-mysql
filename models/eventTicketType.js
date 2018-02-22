@@ -1,7 +1,7 @@
 var bookshelf = require('../db/bookshelf');
 
-require('./event');
-require('./ticket');
+require('./Event');
+require('./Ticket');
 
 var EventTicketType = bookshelf.Model.extend({
   tableName   : 'event_ticket_type',

@@ -1,6 +1,6 @@
 var bookshelf = require('../db/bookshelf');
 
-require('./event');
+require('./Event');
 
 var EventStateLog = bookshelf.Model.extend({
   tableName   : 'event_state_log',

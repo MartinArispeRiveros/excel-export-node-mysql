@@ -1,7 +1,7 @@
 var bookshelf = require('../db/bookshelf');
 
-require('./event');
-require('./user');
+require('./Event');
+require('./User');
 
 var Subsidiary = bookshelf.Model.extend({
   tableName   : 'subsidiary',

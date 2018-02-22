@@ -1,6 +1,6 @@
 var bookshelf = require('../db/bookshelf');
 
-require('./clientRequestsEvent');
+require('./ClientRequestsEvent');
 
 var Client = bookshelf.Model.extend({
   tableName            : 'client',

@@ -1,6 +1,6 @@
 var bookshelf = require('../db/bookshelf');
 
-require('./invoice');
+require('./Invoice');
 
 var Dosage = bookshelf.Model.extend({
   tableName   : 'dosage',

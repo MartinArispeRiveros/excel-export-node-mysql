@@ -1,12 +1,12 @@
 var bookshelf = require('../db/bookshelf');
 
-require('./cardAccessType');
-require('./clientRequestsEvent');
-require('./eventStateLog');
-require('./eventTicketType');
-require('./payment');
-require('./schedule');
-require('./subsidiary');
+require('./CardAccessType');
+require('./ClientRequestsEvent');
+require('./EventStateLog');
+require('./EventTicketType');
+require('./Payment');
+require('./Schedule');
+require('./Subsidiary');
 
 var Event = bookshelf.Model.extend({
   tableName            : 'event',

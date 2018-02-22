@@ -1,6 +1,6 @@
 var bookshelf = require('../db/bookshelf');
 
-require('./ticket');
+require('./Ticket');
 
 var TicketAccessLog = bookshelf.Model.extend({
   tableName   : 'ticket_access_log',

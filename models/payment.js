@@ -1,6 +1,6 @@
 var bookshelf = require('../db/bookshelf');
 
-require('./event');
+require('./Event');
 
 var Payment = bookshelf.Model.extend({
   tableName   : 'payment',

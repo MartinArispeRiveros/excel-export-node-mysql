@@ -1,7 +1,7 @@
 var bookshelf = require('../db/bookshelf');
 
-require('./artist');
-require('./event');
+require('./Artist');
+require('./Event');
 
 var Schedule = bookshelf.Model.extend({
   tableName   : 'schedule',

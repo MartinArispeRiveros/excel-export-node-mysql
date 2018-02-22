@@ -1,6 +1,6 @@
 var bookshelf = require('../db/bookshelf');
 
-require('./user');
+require('./User');
 
 var UserIdentification = bookshelf.Model.extend({
   tableName   : 'user_identification',
