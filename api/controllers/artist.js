@@ -2,7 +2,6 @@ var express = require('express');
 var router  = express.Router();
 
 var ArtistRepository = require('../repositories/ArtistRepository');
-var Artist           = require('../models/Artist');
 var Excel            = require('../helpers/Excel');
 
 router.get('/', function (req, res) {
