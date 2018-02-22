@@ -1,6 +1,6 @@
 var xlsx = require('node-xlsx').default;
 
-class Excel {
+class ExcelUtils {
 
   static getBuffer (collection, name = 'main') {
     var data = [];
@@ -16,4 +16,4 @@ class Excel {
 
 }
 
-module.exports = Excel;
+module.exports = ExcelUtils;
