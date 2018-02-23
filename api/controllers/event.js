@@ -13,11 +13,8 @@ router.get('/', function (req, res) {
 });
 
 router.get('/:id', function (req, res) {
-  EventRepository.getEventById(req.params.id, { withRelated: [ 'eventTicketTypes' ] }).then(function(event) {
-    console.log(event.toJSON());
-    console.log('//////////////////////////////////////////////////////////');
-    res.setHeader('Content-disposition', 'attachment; filename=' + event.get('name') + '.xlsx');
-    res.send(ExcelUtils.getBuffer(event.related('eventTicketTypes').toJSON()));
+  EventRepository.getEventById(req.params.id, { withRelated: [ 'eventTicketTypes.tickets.ticketAccessLogs' ] }).then(function(event) {
+    res.send(event.toJSON());
   });
   console.log('Get Event with id : %s', req.params.id);
 });

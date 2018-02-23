@@ -14,8 +14,8 @@ router.get('/', function (req, res) {
 });
 
 router.get('/:id', function (req, res) {
-  ArtistRepository.getArtistById(req.params.id, { withRelated: [ 'getSchedulesToParse' ] }).then(function(collection) {
-    console.log(collection.related('eventTicketTypes').toJSON());
+  ArtistRepository.getArtistById(req.params.id, { withRelated: [ 'schedules.event' ] }).then(function(collection) {
+    res.send(collection.toJSON());
   });
 });
 
