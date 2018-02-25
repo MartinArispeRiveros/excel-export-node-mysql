@@ -1,5 +1,4 @@
-var configDB  = require('../../knexfile');
-var knex      = require('knex')(configDB);
+var knex      = require('./knex');
 var bookshelf = require('bookshelf')(knex);
 
 bookshelf.plugin('registry');
