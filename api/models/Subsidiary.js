@@ -4,12 +4,13 @@ require('./Event');
 require('./User');
 
 var Subsidiary = bookshelf.Model.extend({
-  tableName   : 'subsidiary',
-  idAttribute : 'subsidiary_id',
-  event       : function() {
+  tableName     : 'subsidiary',
+  idAttribute   : 'subsidiary_id',
+  hasTimestamps : true,
+  event         : function() {
     return this.belongsTo('Event', 'event_id');
   },
-  users       : function() {
+  users         : function() {
     return this.hasMany('User', 'subsidiary_id');
   }
 });

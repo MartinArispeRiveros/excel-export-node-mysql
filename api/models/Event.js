@@ -11,6 +11,7 @@ require('./Subsidiary');
 var Event = bookshelf.Model.extend({
   tableName            : 'event',
   idAttribute          : 'event_id',
+  hasTimestamps        : true,
   cardAccessTypes      : function() {
     return this.hasMany('CardAccessType', 'event_id');
   },

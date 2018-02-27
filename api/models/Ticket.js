@@ -7,6 +7,7 @@ require('./TicketAccessLog');
 var Ticket = bookshelf.Model.extend({
   tableName        : 'ticket',
   idAttribute      : 'ticket_id',
+  hasTimestamps    : true,
   eventTicketType  : function() {
     return this.belongsTo('EventTicketType', 'event_ticket_type_id');
   },

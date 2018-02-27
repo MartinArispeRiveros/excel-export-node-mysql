@@ -4,12 +4,13 @@ require('./Client');
 require('./Event');
 
 var ClientRequestsEvent = bookshelf.Model.extend({
-  tableName   : 'client_requests_event',
-  idAttribute : 'client_requests_event_id',
-  client      : function() {
+  tableName     : 'client_requests_event',
+  idAttribute   : 'client_requests_event_id',
+  hasTimestamps : true,
+  client        : function() {
     return this.belongsTo('Client', 'client_id');
   },
-  event       : function() {
+  event         : function() {
     return this.belongsTo('Event', 'event_id');
   }
 });

@@ -6,6 +6,7 @@ require('./UserIdentification');
 var User = bookshelf.Model.extend({
   tableName           : 'user',
   idAttribute         : 'user_id',
+  hasTimestamps       : true,
   subsidiary          : function() {
     return this.belongsTo('Subsidiary', 'subsidiary_id');
   },

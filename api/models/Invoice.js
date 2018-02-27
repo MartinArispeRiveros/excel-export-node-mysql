@@ -4,12 +4,13 @@ require('./Dosage');
 require('./Ticket');
 
 var Invoice = bookshelf.Model.extend({
-  tableName   : 'invoice',
-  idAttribute : 'invoice_id',
-  dosage      : function() {
+  tableName     : 'invoice',
+  idAttribute   : 'invoice_id',
+  hasTimestamps : true,
+  dosage        : function() {
     return this.belongsTo('Dosage', 'dosage_id');
   },
-  tickets     : function() {
+  tickets       : function() {
     return this.hasMany('Ticket', 'invoice_id');
   }
 });

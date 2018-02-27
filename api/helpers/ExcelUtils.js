@@ -14,9 +14,14 @@ class ExcelUtils {
       data.push(dataRow);
     });
     
+    console.log(data);
+
     return xlsx.build([{
       name: name,
       data: data
+    }, 
+    {
+      cellDates: true
     }]);
   }
 

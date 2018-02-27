@@ -4,12 +4,13 @@ require('./Artist');
 require('./Event');
 
 var Schedule = bookshelf.Model.extend({
-  tableName   : 'schedule',
-  idAttribute : 'schedule_id',
-  artist      : function() {
+  tableName     : 'schedule',
+  idAttribute   : 'schedule_id',
+  hasTimestamps : true,
+  artist        : function() {
     return this.belongsTo('Artist', 'artist_id');
   },
-  event       : function() {
+  event         : function() {
     return this.belongsTo('Event', 'event_id');
   }
 });
