@@ -1,8 +1,8 @@
 var express = require('express');
 var router  = express.Router();
 
-var EventRepository  = require('../repositories/EventRepository');
-var ExcelUtils       = require('../helpers/ExcelUtils');
+var EventRepository = require('../repositories/EventRepository');
+var ExcelUtils      = require('../helpers/ExcelUtils');
 
 router.get('/', function (req, res) {
   Events.getAllEvents().then(function(collection) {
@@ -17,7 +17,21 @@ router.get('/:id', function (req, res) {
     res.setHeader('Content-disposition', 'attachment; filename=' + event.get('name') + '.xlsx');
     return EventRepository.getAllEventTicketAccessLogInfoByEvent(event);
   }).then(function(collection) {
-    res.send(ExcelUtils.getBuffer(collection.toJSON()));
+    res.send(
+      ExcelUtils.getBuffer(
+        collection.toJSON(),
+        [
+          `Ticket's Owner`,
+          `Ticket's Type`,
+          `Ticket's Validation Date`,
+          `Gate`,
+          `Created By`,
+          `Created At`,
+          `Ticket's ID`,
+          'Card Access ID'
+        ]
+      )
+    );
   });
 
   /*EventRepository.getEventById(req.params.id, { withRelated: [ 'eventTicketTypes.tickets.ticketAccessLogs' ] }).then(function(event) {

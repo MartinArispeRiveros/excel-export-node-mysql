@@ -2,16 +2,22 @@ var xlsx = require('node-xlsx').default;
 
 class ExcelUtils {
 
-  static getBuffer (collection = [], name = 'main') {
+  static getBuffer (collection = [], headers = [], name = 'main') {
     var data = [];
-    for (var index = 0; index < collection.length; index++) {
+    data.push(headers);
+
+    collection.forEach(jsonObject => {
       var dataRow = [];
-      for (var value in collection[index]) {
-        dataRow.push(collection[index][value]);
+      for (var jsonAttribute in jsonObject) {
+        dataRow.push(jsonObject[jsonAttribute]);
       }
       data.push(dataRow);
-    }
-    return xlsx.build([{name: name, data: data}]);
+    });
+    
+    return xlsx.build([{
+      name: name,
+      data: data
+    }]);
   }
 
 }
