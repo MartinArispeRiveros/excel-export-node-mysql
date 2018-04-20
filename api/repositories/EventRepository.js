@@ -33,6 +33,32 @@ class EventRepository {
       .fetch();
   }
 
+
+  static getAllEventCardAccessLogInfoByEvent(event, fetch = {}) {
+    return Event
+      .collection()
+      .query(function(qb) {
+        qb
+          .join('card_access_type', 'event.event_id', '=', 'card_access_type.event_id')
+          .join('card_access', 'card_access.card_access_type_id', '=', 'card_access_type.card_access_type_id')
+          .join('ticket_access_log', 'ticket_access_log.card_access_id', '=', 'card_access.card_access_id')
+          .select({
+            'owner_name': 'card_access.name'
+          })
+          .select(
+            'card_access_type.name',
+            'ticket_access_log.ticket_validation_date',
+            'ticket_access_log.gate',
+            'ticket_access_log.created_by',
+            'ticket_access_log.created_at',
+            'ticket_access_log.ticket_id',
+            'ticket_access_log.card_access_id',
+          )
+          .where('event.event_id', '=', event.get('event_id'));
+      })
+      .fetch();
+  }
+
 }
 
 module.exports = EventRepository;
