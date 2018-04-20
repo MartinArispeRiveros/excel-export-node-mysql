@@ -13,16 +13,23 @@ router.get('/', function (req, res) {
 });
 
 router.get('/:id', function (req, res) {
+  var ticketAccessLogs = [];
+  var globalEvent = null;
   EventRepository.getEventById(req.params.id).then(function(event) {
     res.setHeader('Content-disposition', 'attachment; filename=' + event.get('name') + '.xlsx');
+    globalEvent = event;
     return EventRepository.getAllEventTicketAccessLogInfoByEvent(event);
   }).then(function(collection) {
+    ticketAccessLogs = ExcelUtils.jsonToArray(collection.toJSON());
+    return EventRepository.getAllEventCardAccessLogInfoByEvent(globalEvent);
+  }).then(function(collection) {
+    var cardAccessLogs = ExcelUtils.jsonToArray(collection.toJSON());
     res.send(
       ExcelUtils.getBuffer(
-        collection.toJSON(),
+        ticketAccessLogs.concat(cardAccessLogs),
         [
-          `Ticket's Owner`,
-          `Ticket's Type`,
+          `Owner`,
+          `Type`,
           `Ticket's Validation Date`,
           `Gate`,
           `Created By`,
@@ -33,33 +40,6 @@ router.get('/:id', function (req, res) {
       )
     );
   });
-
-  /*EventRepository.getEventById(req.params.id, { withRelated: [ 'eventTicketTypes.tickets.ticketAccessLogs' ] }).then(function(event) {
-    res.setHeader('Content-disposition', 'attachment; filename=' + event.get('name') + 'Event.xlsx');
-    return event.related('eventTicketTypes');
-  }).then(function(eventTicketTypes) {
-    var tickets = Tickets.forge();
-    eventTicketTypes.forEach(eventTicketType => {
-      eventTicketType
-        .related('tickets')
-        .forEach(ticket => {
-          tickets.push(ticket)
-        });
-    });
-    return tickets;
-  }).then(function(tickets) {
-    var ticketAccessLogs = TicketAccessLogs.forge();
-    tickets.forEach(ticket => {
-      ticket
-        .related('ticketAccessLogs')
-        .forEach(ticketAccessLog => {
-          ticketAccessLogs.push(ticketAccessLog);
-        });
-    });
-    return ticketAccessLogs;
-  }).then(function(ticketAccessLogs) {
-    res.send(ExcelUtils.getBuffer(ticketAccessLogs.toJSON()));
-  });*/
 
   console.log('Get Event with id : %s', req.params.id);
 });

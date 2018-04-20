@@ -3,7 +3,7 @@ var dbConfig = {
   connection: {
     host     :  'localhost',
     user     :  'root',
-    password :  'mysql',
+    password :  '',
     database :  'actua'
   }
 };

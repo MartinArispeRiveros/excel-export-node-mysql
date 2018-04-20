@@ -10,10 +10,8 @@ class ExcelUtils {
     return jsonAttribute;
   }
 
-  static getBuffer (collection = [], headers = [], name = 'main') {
+  static jsonToArray (collection = []) {
     var data = [];
-    data.push(headers);
-
     collection.forEach(jsonObject => {
       var dataRow = [];
       for (var jsonAttribute in jsonObject) {
@@ -21,7 +19,13 @@ class ExcelUtils {
       }
       data.push(dataRow);
     });
+    return data;
+  }
 
+  static getBuffer (collection = [], headers = [], name = 'main') {
+    var data = [];
+    data.push(headers);
+    data = data.concat(collection);
     return xlsx.build([{
       name: name,
       data: data
