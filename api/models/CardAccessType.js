@@ -1,6 +1,8 @@
 var bookshelf = require('../commons/bookshelf');
 
 require('./Event');
+require('./TicketAccessLog');
+require('./CardAccess');
 
 var CardAccessType = bookshelf.Model.extend({
   tableName     : 'card_access_type',
@@ -8,6 +10,11 @@ var CardAccessType = bookshelf.Model.extend({
   hasTimestamps : true,
   event         : function() {
     return this.belongsTo('Event', 'event_id');
+  },
+  ticketAccessLogs : function() {
+    return this
+      .hasMany('TicketAccessLog', 'card_access_type_id')
+      .through('CardAccess', 'card_access_id');
   }
 });
 
